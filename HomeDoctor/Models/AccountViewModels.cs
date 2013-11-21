@@ -23,6 +23,26 @@ namespace HomeDoctor.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ProfileViewModel
+    {
+        [Required]
+        [Display(Name = "Логин в скайп*")]
+        public string SkypeLogin { get; set; }
+
+        [Display(Name = "Имя")]
+        public string Name { get; set; }
+
+        [Display(Name = "Фамилия")]
+        public string Surname { get; set; }
+
+        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "{0} должен быть числом.")]
+        [Display(Name = "Возраст")]
+        public int? Age { get; set; }
+
+        [Display(Name = "Баланс (грн)")]
+        public decimal Money { get; set; }
+    }
+
     public class LoginViewModel
     {
         [Required]
@@ -68,5 +88,8 @@ namespace HomeDoctor.Models
         [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "{0} должен быть числом.")]
         [Display(Name = "Возраст")]
         public int? Age { get; set; }
+
+        [Display(Name = "Баланс (грн)")]
+        public decimal Money { get; set; }
     }
 }

@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+@section css {
+<link href="/Content/Admin.css" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "Администрирование";
+}
+
+<h2>@ViewBag.Title</h2>
+<p style="text-indent: 0px;">Вы вошли как <strong>@User.Identity.GetUserName()</strong>, ваш статус <strong>Администратор</strong>.</p>
+<h2 style="position: absolute; left: 54%;">Инсрукция</h2>
+<div class="div_menu">
+    <div class="div_menu_record">
+        @Html.ActionLink("Управление пользователями", "Profile", "Account")
+    </div>
+    <div class="div_menu_record">
+        @Html.ActionLink("Управление записями", "Profile", "Account")
+    </div>
+    <div class="div_menu_record">
+        @Html.ActionLink("About", "Profile", "Account")
+    </div>
+    <div class="div_menu_record">
+        @Html.ActionLink("Contact", "Profile", "Account")
+    </div>
+    <hr/>
+</div>
+<div class="content">
+    <p>
+        Данная страница предназначена для администрирования сайта. Доступ к редактированию открыт только
+        для категории администраторы. Частично к функциям редактора имеют доступ продвинутые пользователи
+        (<strong>Advantage User</strong>).
+    </p>
+    <p>
+        Весь интерфейс представлен слева, это
+    </p>
+    <ol>
+        <li>Управление пользователями - предоставляет возможность просмотра и редактирования
+            существующих записей пользователя. Добавление и съем денег так же осуществляется в этой форме.
+        Предоставляет широкий функционал для поиска конкретных пользователей по признаку.</li>
+        <li>Управление записями - предоставляет интерфейс для общения врачей с пользователями. В данный пункт входят:
+        обмен сообщениями, записи на консультацию и ответы на них.</li>
+        <li>About - редактирование страницы о сайте.</li>
+        <li>Contact - редактиоование страницы контактов.</li>
+    </ol>
+</div>

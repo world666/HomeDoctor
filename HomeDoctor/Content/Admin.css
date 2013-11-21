@@ -1,0 +1,33 @@
+﻿
+A {
+    color: #a0a0a0;
+    font-size: 15px;
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+}
+
+A:hover {
+    color: #c0c0c0;
+    font-size: 17px;
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+}
+
+p {
+    text-indent: 20px; /* Отступ первой строки в пикселах */
+}
+.div_menu {
+    margin-top: 50px;
+    border-right: 1px solid lemonchiffon;
+    width: 250px;
+    float: left;
+}
+.div_menu_record {
+    text-align: left;
+    height: 30px;
+}
+.content {
+
+    height: 400px;
+    margin-left: 300px;
+    padding: 70px;
+}
+

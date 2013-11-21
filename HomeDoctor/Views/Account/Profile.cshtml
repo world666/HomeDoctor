@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Профиль";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-md-12">
+        @Html.Partial("_ChangeProfilePartial")
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jqueryFixes.js"></script>
+}

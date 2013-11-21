@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Security;
+using DataRepository.DataAccess;
+using DataRepository.Model;
 using HomeDoctor.Models;
-using HomeDoctor.Models.Database;
-using HomeDoctor.Models.Database.Tables;
 
 namespace HomeDoctor.Providers
 {

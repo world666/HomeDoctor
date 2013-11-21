@@ -6,9 +6,9 @@ using System.Web.Security;
 using System.Web.Helpers;
 using System.Security.Cryptography;
 using System.Web.WebPages;
+using DataRepository.DataAccess;
+using DataRepository.Model;
 using HomeDoctor.Models;
-using HomeDoctor.Models.Database;
-using HomeDoctor.Models.Database.Tables;
 using Microsoft.Internal.Web.Utils;
 
 namespace HomeDoctor.Providers
@@ -50,20 +50,20 @@ namespace HomeDoctor.Providers
                 {
                     using (UserContext _db = new UserContext())
                     {
-                        var user = new User()
-                        {
-                            UserName = registerVm.UserName,
-                            Password = Crypto.HashPassword(registerVm.Password),
-                            CreationDate = DateTime.Now
-                        };
-
                         Profile profile = new Profile()
                         {
                             SkypeLogin = registerVm.SkypeLogin,
                             Name = registerVm.Name,
                             Surname = registerVm.Surname,
                             Age = registerVm.Age,
-                            User = user
+                            Money = 0m,
+                        };
+                        var user = new User()
+                        {
+                            UserName = registerVm.UserName,
+                            Password = Crypto.HashPassword(registerVm.Password),
+                            CreationDate = DateTime.Now,
+                            Profile =  profile
                         };
                         if (_db.Roles.Find(2) != null)
                         {

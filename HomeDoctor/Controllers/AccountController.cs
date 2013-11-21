@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DataRepository.Model;
 using HomeDoctor.Providers;
 using HomeDoctor.Services;
 using Microsoft.AspNet.Identity;
@@ -108,6 +109,7 @@ namespace HomeDoctor.Controllers
 
         //
         //GET: /Account/Manage
+        [Authorize]
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -122,6 +124,7 @@ namespace HomeDoctor.Controllers
         //
         // POST: /Account/Manage
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(ManageUserViewModel model)
         {
@@ -132,6 +135,36 @@ namespace HomeDoctor.Controllers
                 ? RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess})
                 : RedirectToAction("Manage", new {Message = ManageMessageId.Error});
         }
+
+
+        //
+        //GET: /Account/Profile
+        [Authorize]
+        public ActionResult Profile(ProfileMessageId? message)
+        {
+            
+            if(IoC.Resolve<RoleProvider>().IsUserInRole(User.Identity.GetUserName(),"Admin"))
+               return RedirectToAction("Administration", "Admin");
+            ViewBag.StatusMessage =
+                message == ProfileMessageId.ChangeProfileSuccess ? "Ваш профиль был изменен."
+                : message == ProfileMessageId.Error ? "Ошибка."
+                : "";
+            ViewBag.ReturnUrl = Url.Action("Profile");
+            return View(IoC.Resolve<DataBaseService>().GetProfile(User.Identity.Name));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Profile(ProfileViewModel profileViewModel)
+        {
+            ViewBag.ReturnUrl = Url.Action("Profile");
+            bool isSucceeded = IoC.Resolve<DataBaseService>().UpdateProfile(profileViewModel, User.Identity.Name);
+            return isSucceeded
+                ? RedirectToAction("Profile", new { Message = ProfileMessageId.ChangeProfileSuccess })
+                : RedirectToAction("Profile", new { Message = ProfileMessageId.Error });
+        }
+
         
         //
         // POST: /Account/LogOff
@@ -147,13 +180,7 @@ namespace HomeDoctor.Controllers
         
 
         #region Helpers
-        public enum ManageMessageId
-        {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            Error
-        }
+        
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

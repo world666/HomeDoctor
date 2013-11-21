@@ -1,5 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using System.Data.Entity;
+using Microsoft.Owin;
 using Owin;
+using DataRepository.DataAccess;
 
 [assembly: OwinStartupAttribute(typeof(HomeDoctor.Startup))]
 namespace HomeDoctor
@@ -9,6 +11,7 @@ namespace HomeDoctor
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            Database.SetInitializer(new HomeDoctorDbInitializer());
         }
     }
 }
