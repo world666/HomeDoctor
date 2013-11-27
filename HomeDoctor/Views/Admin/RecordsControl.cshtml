@@ -1,0 +1,27 @@
+﻿@section css {
+    <link href="/Content/Admin.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "Администрирование";
+    ViewBag.Header = "Управление записями";
+}
+
+
+@Html.Partial("_AdminPartial")
+
+<div class="content">
+    <h2 align="center">@ViewBag.Header</h2>
+    <br/>
+    @using (Ajax.BeginForm("FindRecords", new AjaxOptions {UpdateTargetId = "ajax_content"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Label("Критерий поиска: ")
+        @Html.DropDownList("type", new SelectList(new[] {"Login", "SkypeLogin", "Name", "Surname"}), new {@class = "form-ajax"})
+        @Html.Label(" Значение:", new {style = "margin-left: 10px;"})
+        @Html.TextBox("value", "", new {@class = "form-ajax"})
+        <input type="submit" class="btn btn-default" value="Поиск" />
+    }
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    @Html.Partial("FindRecords")
+</div>

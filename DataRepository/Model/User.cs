@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataRepository.Model
 {
@@ -14,5 +15,7 @@ namespace DataRepository.Model
 
         public int? ProfileId { get; set; }
         public virtual Profile Profile { get; set; }
+
+        public virtual ICollection<UserRecord> UserRecords { get; set; }
     }
 }

@@ -1,0 +1,44 @@
+﻿@using HomeDoctor.Models
+@model List<RecordViewModel>
+    
+<script>
+    $(function() {
+        $("#accordion").accordion();
+    });
+</script>
+<div id="ajax_content">
+    @if (!Model.Any())
+    {
+        <p>архив сообщений пуст</p>
+    }
+    else
+    {
+        <h3 align="center">Архив сообщений</h3>
+         using (Html.BeginForm("RecordsControl", "Admin", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+          {
+              @Html.AntiForgeryToken()
+              @Html.ValidationSummary()
+              <div id="accordion">
+                                    @for (int i = 0; i < Model.Count; i++)
+                  {
+                      if (@Model[i].Answered)
+                      {
+                          <h3 style ="background: lightgray">@Model[i].Date.ToShortDateString() @Model[i].Title  (@Model[i].Date.ToShortTimeString() from "@Model[i].UserName") + ответ</h3>
+                      }
+                      else
+                      {
+                          <h3>@Model[i].Date.ToShortDateString() @Model[i].Title  (@Model[i].Date.ToShortTimeString() from "@Model[i].UserName")</h3>
+                      }
+                      <div>
+                          <p style="padding-bottom: 10px;">
+                              @Html.HiddenFor(m=>m[i].RecordId)
+                              @Html.TextAreaFor(m => m[i].Message,new{style="width: 100%; border: none; background: #eeeeee"})
+                          </p>
+                      </div>
+                  }
+              </div>
+              <div style="margin-top: 10px;" align="right"><button class="btn btn-default">Отправить</button></div>
+          }    
+    }
+</div>
+

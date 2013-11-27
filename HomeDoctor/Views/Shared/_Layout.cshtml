@@ -6,8 +6,11 @@
     <title>@ViewBag.Title - Home Doctor Application</title>
     @Styles.Render("~/Content/css")
     @RenderSection("css", required: false)
+    @Scripts.Render("~/Scripts/jquery-1.7.1.min.js")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.custom.js")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -32,13 +35,14 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        <br/>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Home Doctor Application</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

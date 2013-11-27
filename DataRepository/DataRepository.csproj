@@ -53,6 +53,7 @@
     <Compile Include="DataAccess\HomeDoctorDbInitializer.cs" />
     <Compile Include="DataAccess\UserContext.cs" />
     <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\UserRecord.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
